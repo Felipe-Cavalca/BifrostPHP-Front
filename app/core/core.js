@@ -113,7 +113,10 @@ class Bifrost {
         this.#applyPWA();
 
         if (typeof after === "function") {
-            after(this);
+            // Registra a função after para ser executada após o carregamento completo da página
+            window.addEventListener("load", () => {
+                after(this);
+            });
         }
     }
 
