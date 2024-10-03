@@ -5,7 +5,7 @@
         "/libs/bootstrap-5.3.2-dist/css/bootstrap.css"
     ],
     "jsFiles": [
-        "/libs/customComponents-1.8.3-28.mim.js",
+        "/libs/customComponents-1.8.4-29.min.js",
         "/libs/jquery-3.6.0.js",
         "/libs/bootstrap-5.3.2-dist/js/bootstrap.js"
     ],
