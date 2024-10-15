@@ -1,0 +1,55 @@
+input {
+    width: 300px;
+    padding: 10px;
+    font-size: 16px;
+    border-radius: 20px;
+    border: 2px solid transparent;
+    background-color: var(--input-bgColor);
+    color: var(--input-color);
+    outline: none;
+    transition: border-color 0.5s, box-shadow 0.5s;
+    font-family: 'JetBrains Mono', monospace;
+}
+
+input::placeholder {
+    color: var(--input-placeholder-color);
+}
+
+input:valid {
+    border-color: var(--input-valid-border-color);
+    box-shadow: 0 0 10px var(--input-valid-border-color);
+}
+
+input:invalid {
+    border-color: var(--input-invalid-border-color);
+    box-shadow: 0 0 10px var(--input-invalid-border-color);
+}
+
+input[required]:placeholder-shown {
+    border-bottom: 2px solid var(--input-required-border-color);
+}
+
+input:placeholder-shown {
+    border-color: initial;
+    box-shadow: none;
+}
+
+input:focus {
+    border-color: var(--input-focus-border-color);
+    box-shadow: 0 0 10px var(--input-focus-border-color);
+}
+
+input[required]:placeholder-shown:focus {
+    border-color: var(--input-focus-border-color);
+    box-shadow: 0 0 10px var(--input-focus-border-color);
+}
+
+input~span,
+input:valid~span {
+    display: none;
+}
+
+input:not(:placeholder-shown):invalid~span.danger {
+    display: block;
+    color: var(--span-danger-color);
+}

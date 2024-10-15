@@ -1,6 +1,14 @@
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap');
+
+html {
+    scroll-behavior: smooth;
+}
+
 body {
-    background-color: var(--cor-fundo);
-    color: var(--cor-texto);
+    margin: 0;
+    background-color: var(--color-background);
+    color: var(--color-text);
+    font-family: 'JetBrains Mono', 'Courier New', monospace;
 }
 
 pre {
@@ -10,4 +18,10 @@ pre {
     border: 1px solid #ccc;
     border-radius: 4px;
     overflow: auto;
+}
+
+a {
+    text-decoration: none;
+    color: var(--cor-texto);
+    -webkit-tap-highlight-color: transparent;
 }
