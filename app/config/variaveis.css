@@ -1,6 +1,24 @@
-/* variaveis css */
 :root {
-    /* variveis gerais */
-    --cor-fundo: #1A233A;
-    --cor-texto: #8DC7F8;
+    --color-background: #16151d;
+    --color-text: #fff;
+    --color-primary: #6c4afe;
+    --color-secondary: #a164f1;
+
+    --button-hover-bgColor: #2e199b;
+    --button-active-bgColor: #000000;
+    --button-disabled-bgColor: #ccc;
+    --button-disabled-color: #666;
+
+    --button-danger-bgColor: #ff4d4d;
+    --button-danger-hover-bgColor: #cc0000;
+
+    --input-bgColor: #2b2b3a;
+    --input-color: #ccc;
+    --input-placeholder-color: #888;
+    --input-valid-border-color: green;
+    --input-invalid-border-color: red;
+    --input-required-border-color: yellow;
+    --input-focus-border-color: blue;
+
+    --span-danger-color: red;
 }
