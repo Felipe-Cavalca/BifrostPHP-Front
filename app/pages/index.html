@@ -3,14 +3,67 @@
 
 <head>
     <title>Página Inicial</title>
+    <link rel="stylesheet" href="../css/pages/index.css">
     <script src="../core/core.js" defer></script>
     <script src="../js/pages/index.js" defer></script>
 </head>
 
 <body>
+    <c-alert>
+        <section slot="header">
+            {{name}} diz:
+        </section>
+        <section slot="body">
+            <h1>Mensagem customizada</h1>
+            <pre id="response-form"></pre>
+        </section>
+    </c-alert>
+
     <c-maximized>
         <h1>Olá, seja bem-vindo ao {{name}}</h1>
         <h2>{{slogan}}</h2>
+    </c-maximized>
+
+    <c-maximized id="test">
+        <c-card>
+            <section id="text-form">
+                <h3>Exemplo de form</h3>
+                <small>Apenas um exemplo de designe de formulário.</small>
+            </section>
+            <form action="exampleResponse.json" method="POST" data-noApi="true">
+                <section>
+                    <label for="filed-name">Qual o seu nome verdadeiro?</label>
+                    <input type="text" name="name" id="filed-name" placeholder="Fulano da silva" required minlength="4"
+                        autocomplete="on" pattern="^[a-zA-ZÀ-ÖØ-öø-ÿ]+(\s+[a-zA-ZÀ-ÖØ-öø-ÿ]+)+$" inputmode="latin-name"
+                        autocapitalize="words" spellcheck="true">
+                    <span class="danger">
+                        <b>Esse deve ser seu nome real!</b>
+                    </span>
+                </section>
+                <section>
+                    <label for="email">Me diga, qual o seu melhor email ?</label>
+                    <input type="email" name="email" id="email" placeholder="fulano@email.com" autocomplete="on"
+                        inputmode="email" autocapitalize="none">
+                    <span class="danger">
+                        <b>O email deve estar correto!</b>
+                    </span>
+                </section>
+                <section>
+                    <label for="confirmPassword">Confirme sua senha agora</label>
+                    <input type="password" name="confirmPassword" id="confirmPassword" placeholder="***" required
+                        minlength="4" autocomplete="off">
+                    <span class="danger">
+                        <b>Essa senha deve ter no mínimo 4 caracteres.</b>
+                    </span>
+                </section>
+                <section>
+                    <button type="submit">Testar</button>
+                </section>
+                <section>
+                    <progress value="32" max="100"> 32% </progress>
+                </section>
+            </form>
+        </c-card>
     </c-maximized>
 </body>
 
