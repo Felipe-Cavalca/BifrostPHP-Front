@@ -1,0 +1,84 @@
+<style>
+    @import url(/css/buttons.css);
+
+    @keyframes fadeIn {
+        from {
+            opacity: 0;
+        }
+
+        to {
+            opacity: 1;
+        }
+    }
+
+    :host {
+        display: none;
+        position: fixed;
+        z-index: 5;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+        background-color: rgba(0, 0, 0, 0.8);
+        opacity: 0;
+        animation: fadeIn 1s forwards;
+    }
+
+    #content {
+        position: relative;
+        background-color: var(--color-background);
+        margin: 5% auto;
+        border: 2px solid var(--color-border);
+        max-width: 50rem;
+        border-radius: 10px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.9);
+        text-align: center;
+        border-radius: 15px;
+        padding-bottom: 20px;
+    }
+
+    #header {
+        background-color: #333;
+        color: var(--color-text);
+        padding: 10px;
+        border-radius: 15px 15px 0 0;
+    }
+
+    #body {
+        margin: 10px;
+    }
+
+    #closeButton {
+        width: 50%;
+        max-width: 90%;
+    }
+</style>
+
+<div id="content">
+    <div id="header">
+        <slot name="header"></slot>
+    </div>
+    <div id="body">
+        <slot name="body">
+            <h4>
+                Desculpe, Houve um erro no sistema.
+            </h4>
+        </slot>
+    </div>
+    <div id="footer">
+        <slot name="footer">
+            <button id="closeButton">
+                Fechar
+            </button>
+        </slot>
+    </div>
+</div>
+
+<script>
+    function initializeComponentScript(self) {
+        self.shadowRoot.getElementById('closeButton').addEventListener('click', () => {
+            self.style.display = 'none';
+        });
+    }
+</script>

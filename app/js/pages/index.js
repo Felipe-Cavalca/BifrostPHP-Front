@@ -6,8 +6,10 @@ const bifrost = new Bifrost(
 
         bifrost.form("form", () => {
             // return false;
-        }, () => {
+        }, async (response) => {
+            document.querySelector("c-alert").style.display = 'block'
 
+            document.querySelector("#response-form").innerHTML = await response.text();
         });
     }
 );
