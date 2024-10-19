@@ -92,16 +92,43 @@ class Bifrost {
     // Classe para manipulação de elementos do dom
     #dom = new DOM();
 
-    // Configurações do app
-    #configApp = null;
-
-    // Arquivo de configuração
-    #jsonIncludes = null;
+    #configApp = undefined;
+    #includes = undefined;
 
     // Prompt para instalação do PWA
     deferredPrompt
 
     constructor(before, after) {
+        this.init(before, after);
+    }
+
+    get config() {
+        return this.#configApp;
+    }
+
+    get includes() {
+        return this.#includes;
+    }
+
+    get cssFiles() {
+        return this.includes.cssFiles;
+    }
+
+    get jsFiles() {
+        return this.includes.jsFiles;
+    }
+
+    async loadConfigApp() {
+        return this.#configApp = JSON.parse(await this.requestGet("/config/app.json"));
+    }
+
+    async loadIncludes() {
+        return this.#includes = JSON.parse(await this.requestGet("/config/includes.json"));
+    }
+
+    async init(before, after) {
+        await this.loadConfigApp();
+        await this.loadIncludes();
 
         if (typeof before === "function") {
             before(this);
@@ -111,33 +138,17 @@ class Bifrost {
         this.#includeDefaultJs();
         this.#includeMetaDataAndLink();
         this.#applyPWA();
+        this.#dom.disableAutoComplete();
 
         if (typeof after === "function") {
-            // Registra a função after para ser executada após o carregamento completo da página
-            window.addEventListener("load", () => {
-                after(this);
-            });
+            this.#dom.addEvent(window, "load", after(this));
         }
     }
 
-    get configApp() {
-        if (this.#configApp === null) {
-            this.#configApp = JSON.parse(this.requestGet("/config/app.json"));
-        }
-        return this.#configApp;
-    }
-
-    get #includes() {
-        if (this.#jsonIncludes === null) {
-            this.#jsonIncludes = JSON.parse(this.requestGet("/config/includes.json"));
-        }
-        return this.#jsonIncludes;
-    }
-
-    #includeDefaultCss() {
+    async #includeDefaultCss() {
         let $this = this;
         let head = this.#dom.head;
-        let cssFiles = this.#includes.cssFiles;
+        let cssFiles = this.cssFiles;
 
         cssFiles.forEach(function (cssFile) {
             let attrs = {
@@ -150,10 +161,10 @@ class Bifrost {
         });
     }
 
-    #includeDefaultJs() {
+    async #includeDefaultJs() {
         let $this = this;
         let body = this.#dom.body;
-        let jsFiles = this.#includes.jsFiles;
+        let jsFiles = this.jsFiles;
 
         jsFiles.forEach(function (jsFile) {
             let attrs = {
@@ -165,7 +176,7 @@ class Bifrost {
         });
     }
 
-    #includeMetaDataAndLink() {
+    async #includeMetaDataAndLink() {
         let $this = this;
         let metaData = this.#includes.metaData;
         let html = this.#dom.getElement("html");
@@ -183,7 +194,7 @@ class Bifrost {
         });
     }
 
-    #applyPWA() {
+    async #applyPWA() {
         let manifest = {
             rel: "manifest",
             href: this.#getUrl("/config/manifest.json")
@@ -213,26 +224,24 @@ class Bifrost {
         return url + "?" + urlParams.toString();
     }
 
-    requestGet(url, params) {
-        return this.request(url, {}, params, "GET");
+    async requestGet(url, params = undefined) {
+        return (await this.request({ url: url, params: params })).text();
     }
 
-    requestPost(url, data, params, awaitResponse = true) {
-        return this.request(url, data, params, "POST", awaitResponse);
+    async requestPost({ url, data, params = undefined }) {
+        return (await this.request({ url: url, method: "POST", data: data, params: params })).text();
     }
 
-    request(url, data, params, method, awaitResponse = true) {
+    async request({ url, method = "GET", data = undefined, params = undefined, headers = undefined }) {
         const fullUrl = this.#addParamsToUrl(this.#getUrl(url), params);
-        try {
-            const xhttp = new XMLHttpRequest();
-            xhttp.open(method, fullUrl, !awaitResponse); // false = aguarda retorno
-            xhttp.send(JSON.stringify(data));
-            return xhttp.responseText;
-        } catch (e) {
-            console.error(e);
-        }
 
-        return undefined;
+        return await fetch(fullUrl, {
+            method: method,
+            headers: headers ?? {
+                'Content-Type': 'application/json'
+            },
+            body: method !== 'GET' ? JSON.stringify(data) : undefined
+        });
     }
 
     form(formSelector, beforeSubmit, afterSubmit) {
@@ -246,11 +255,14 @@ class Bifrost {
             }
 
             if (beforeResult !== false) {
-                const action = "/api" + form.action.replace(location.origin, "");
+                let action = form.action.replace(location.origin, "");
+                if (this.#dom.getAttribute(form, "data-noApi") == null) {
+                    action = "/api" + action;
+                }
                 const method = this.#dom.getAttribute(form, "method");
                 const formData = new FormData(form);
                 const formDataObject = Object.fromEntries(formData);
-                const response = await this.request(action, formDataObject, {}, method, true);
+                const response = await this.request({ url: action, data: formDataObject, method: method });
 
                 if (typeof afterSubmit === 'function') {
                     afterSubmit(response);
