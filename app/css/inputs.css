@@ -2,7 +2,7 @@ input {
     width: 300px;
     padding: 10px;
     font-size: 16px;
-    border-radius: 20px;
+    border-radius: 8px;
     border: 2px solid transparent;
     background-color: var(--input-bgColor);
     color: var(--input-color);
@@ -46,10 +46,16 @@ input[required]:placeholder-shown:focus {
 
 input~span,
 input:valid~span {
-    display: none;
+    display: block;
+    height: 24px;
+    visibility: hidden;
+    opacity: 0;
+    color: var(--span-danger-color);
+    transition: visibility 0s 0.3s, opacity 0.3s ease;
 }
 
 input:not(:placeholder-shown):invalid~span.danger {
-    display: block;
-    color: var(--span-danger-color);
+    visibility: visible;
+    opacity: 1;
+    transition: visibility 0s 0s, opacity 0.3s ease;
 }

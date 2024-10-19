@@ -8,6 +8,7 @@
     --button-active-bgColor: #000000;
     --button-disabled-bgColor: #ccc;
     --button-disabled-color: #666;
+    --button-submit-bfColor: green;
 
     --button-danger-bgColor: #ff4d4d;
     --button-danger-hover-bgColor: #cc0000;

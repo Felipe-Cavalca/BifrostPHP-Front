@@ -1,8 +1,13 @@
 const bifrost = new Bifrost(
     (bifrost) => {
-        bifrost.replaceTextInElement("body", bifrost.configApp);
     },
     (bifrost) => {
+        bifrost.replaceTextInElement("body", bifrost.config);
 
+        bifrost.form("form", () => {
+            // return false;
+        }, () => {
+
+        });
     }
 );

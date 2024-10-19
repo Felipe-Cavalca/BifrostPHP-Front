@@ -26,6 +26,14 @@ button:disabled {
     cursor: not-allowed;
 }
 
+button[type="submit"] {
+    background-color: var(--button-submit-bfColor);
+}
+
+button[type="submit"]::after {
+    content: " >>";
+}
+
 button.danger {
     background-color: var(--button-danger-bgColor);
 }
