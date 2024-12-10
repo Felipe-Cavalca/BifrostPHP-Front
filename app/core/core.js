@@ -70,12 +70,12 @@ class DOM {
         element.addEventListener(event, callback);
     }
 
-    registerServiceWorker(sw) {
+    async registerServiceWorker(sw) {
         navigator.serviceWorker.register(sw)
-            .then(registration => {
+            .then(async registration => {
                 console.log("Service Worker registrado com sucesso:", registration);
             })
-            .catch(err => {
+            .catch(async err => {
                 console.warn("Registro do Service Worker falhou:", err);
             });
     }
@@ -137,7 +137,7 @@ class Bifrost {
         this.#includeDefaultCss();
         this.#includeDefaultJs();
         this.#includeMetaDataAndLink();
-        this.#applyPWA();
+        this.#includeTags();
         this.#dom.disableAutoComplete();
 
         if (typeof after === "function") {
@@ -154,7 +154,8 @@ class Bifrost {
             let attrs = {
                 rel: "stylesheet",
                 type: "text/css",
-                href: $this.#getUrl(cssFile)
+                href: $this.#getUrl(cssFile),
+                media: "all"
             };
             let elem = $this.#dom.createElement("link", attrs);
             $this.#dom.insertBefore(elem, head);
@@ -163,16 +164,17 @@ class Bifrost {
 
     async #includeDefaultJs() {
         let $this = this;
-        let body = this.#dom.body;
+        let head = this.#dom.head;
         let jsFiles = this.jsFiles;
 
         jsFiles.forEach(function (jsFile) {
             let attrs = {
                 type: "text/javascript",
-                src: $this.#getUrl(jsFile)
+                src: $this.#getUrl(jsFile),
+                defer: ""
             };
             let elem = $this.#dom.createElement("script", attrs);
-            $this.#dom.insertChild(elem, body);
+            $this.#dom.insertChild(elem, head);
         });
     }
 
@@ -194,13 +196,18 @@ class Bifrost {
         });
     }
 
-    async #applyPWA() {
-        let manifest = {
-            rel: "manifest",
-            href: this.#getUrl("/config/manifest.json")
-        };
-        this.#dom.link = manifest;
+    async #includeTags() {
+        let $this = this;
+        let head = this.#dom.head;
+        let tags = this.#includes.tags;
 
+        tags.forEach(function (tag) {
+            let elem = $this.#dom.createElement(tag.tagName, tag.attributes);
+            $this.#dom.insertBefore(elem, head);
+        });
+    }
+
+    async applyPWA() {
         if ("serviceWorker" in navigator) {
             this.#dom.registerServiceWorker(this.#getUrl("/sw.js"));
         }
