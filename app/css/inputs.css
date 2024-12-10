@@ -7,7 +7,6 @@ input {
     background-color: var(--input-bgColor);
     color: var(--input-color);
     outline: none;
-    transition: border-color 0.5s, box-shadow 0.5s;
     font-family: 'JetBrains Mono', monospace;
 }
 
@@ -48,14 +47,10 @@ input~span.danger,
 input:valid~span.danger {
     display: block;
     height: 24px;
-    visibility: hidden;
     opacity: 0;
     color: var(--span-danger-color);
-    transition: visibility 0s 0.3s, opacity 0.3s ease;
 }
 
 input:not(:placeholder-shown):invalid~span.danger {
-    visibility: visible;
     opacity: 1;
-    transition: visibility 0s 0s, opacity 0.3s ease;
 }
