@@ -1,6 +1,6 @@
 {
-    "short_name": "Bifrost",
-    "name": "Bifrost php",
+    "short_name": "Dossier",
+    "name": "Dossier",
     "icons": [
         {
             "src": "/assets/global/server.jpg",
@@ -8,7 +8,7 @@
             "type": "image/jpg"
         }
     ],
-    "start_url": "http:\/\/Bifrost.test\/app\/pages\/",
+    "start_url": "/",
     "background_color": "#16151d",
     "display": "standalone",
     "scope": "/",
