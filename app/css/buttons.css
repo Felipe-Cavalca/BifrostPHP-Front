@@ -1,4 +1,5 @@
-button, a.button {
+button,
+a.button {
     background-color: var(--color-primary);
     color: var(--button-colorText);
     border: none;
@@ -8,19 +9,23 @@ button, a.button {
     cursor: pointer;
 }
 
-button.secondary, a.button.secondary {
+button.secondary,
+a.button.secondary {
     background-color: var(--color-secondary);
 }
 
-button:hover, a.button:hover {
+button:hover,
+a.button:hover {
     background-color: var(--button-hover-bgColor);
 }
 
-button:active, a.button:active {
+button:active,
+a.button:active {
     background-color: var(--button-active-bgColor);
 }
 
-button:disabled, a.button:disabled {
+button:disabled,
+a.button:disabled {
     background-color: var(--button-disabled-bgColor);
     color: var(--button-color-disabled);
     cursor: not-allowed;
@@ -35,15 +40,18 @@ button[type="submit"]::after {
     content: " >>";
 }
 
-button.danger, a.button.danger {
+button.danger,
+a.button.danger {
     background-color: var(--button-danger-bgColor);
     color: var(--button-danger-color);
 }
 
-button.danger:hover, a.button.danger:hover {
+button.danger:hover,
+a.button.danger:hover {
     background-color: var(--button-danger-hover-bgColor);
 }
 
-button.danger:active, a.button.danger:active {
+button.danger:active,
+a.button.danger:active {
     background-color: var(--button-active-bgColor);
 }
