@@ -27,6 +27,7 @@ button:disabled, a.button:disabled {
 }
 
 button[type="submit"] {
+    color: var(--button-submit-color);
     background-color: var(--button-submit-bfColor);
 }
 
