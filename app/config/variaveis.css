@@ -1,18 +1,21 @@
 :root {
     --color-background: #16151d;
     --color-text: #fff;
-    --color-primary: #6c4afe;
+    --color-primary: #75B1FF;
     --color-secondary: #a164f1;
     --color-border: #422ca4;
 
+    --button-colorText: #000;
     --button-hover-bgColor: #2e199b;
     --button-active-bgColor: #000000;
     --button-disabled-bgColor: #ccc;
     --button-disabled-color: #666;
+    --button-submit-color: #fff;
     --button-submit-bfColor: green;
 
     --button-danger-bgColor: #ff4d4d;
     --button-danger-hover-bgColor: #cc0000;
+    --button-danger-color: #000;
 
     --input-bgColor: #2b2b3a;
     --input-color: #ccc;

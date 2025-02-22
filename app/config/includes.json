@@ -35,7 +35,16 @@
                 "rel": "shortcut icon",
                 "href": "/assets/global/favicon.ico",
                 "type": "image/x-icon"
+            },
+            {
+                "rel": "manifest",
+                "href": "/config/manifest.json"
+            },
+            {
+                "rel": "preconnect",
+                "href": "https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap"
             }
         ]
-    }
+    },
+    "tags": []
 }

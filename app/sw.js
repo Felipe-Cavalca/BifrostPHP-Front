@@ -1,7 +1,7 @@
-self.addEventListener("install", event => {
+self.addEventListener("install", async event => {
 
 });
 
-self.addEventListener("fetch", event => {
+self.addEventListener("fetch", async event => {
 
 });
