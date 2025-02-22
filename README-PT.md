@@ -2,13 +2,6 @@
 
 [![Repo](https://img.shields.io/badge/Bifrost-Front-blue)](./)
 
-[![GIT](https://img.shields.io/badge/GIT-orange)](./)
-[![MD](https://img.shields.io/badge/MD-darkblue)](./)
-[![YML](https://img.shields.io/badge/YML-darkblue)](./)
-[![Linguagem](https://img.shields.io/badge/JS-yellow)](./)
-[![Linguagem](https://img.shields.io/badge/HTML-red)](./)
-[![Linguagem](https://img.shields.io/badge/CSS-blue)](./)
-
 [![link-readme-inglês](https://img.shields.io/badge/README-English/Inglês-red)](./README.md)
 [![link-readme-Portugês](https://img.shields.io/badge/README-Portuguese/Portugês-green)](./README-PT.md)
 
