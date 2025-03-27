@@ -135,6 +135,7 @@ class Bifrost {
         }
 
         this.#includeDefaultCss();
+        this.applyPWA();
         this.#includeDefaultJs();
         this.#includeMetaDataAndLink();
         this.#includeTags();
