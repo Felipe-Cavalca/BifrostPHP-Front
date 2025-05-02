@@ -1,15 +1,14 @@
 services:
   app:
-    container_name: app
     build:
       context: ./
       dockerfile: ./Dockerfile
     ports:
-      - "20080:80"
+      - "80:80"
     environment:
       - API_HOST=http://api
       - API_PORT=80
     volumes:
-      - ./:/usr/local/apache2/htdocs/
+      - ./:/usr/local/apache2/htdocs/ # DEV
     mem_limit: 512m
     cpus: '0.25'
