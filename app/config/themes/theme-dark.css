@@ -1,0 +1,25 @@
+.theme-dark {
+    --color-background: #16151d;
+    --color-text: #fff;
+    --color-text-secondary: #ccc;
+    --color-primary: #75B1FF;
+    --color-secondary: #a164f1;
+    --color-border: #363545;
+
+    --input-bg-color: #ffffff;
+    --input-color: var(--color-text);
+
+    --card-background: #22212b;
+    --card-color-border: var(--color-border);
+
+    --button-secondary-bg-color: var(--color-secondary);
+    --button-border-color: #ffffff00;
+    --button-disabled-color: #747474;
+
+    --input-bg-color: #585858;
+
+    --card-color-border: var(--color-border);
+
+    --nav-bg-color: var(--color-secondary);
+    --nav-color: var(--color-text);
+}
