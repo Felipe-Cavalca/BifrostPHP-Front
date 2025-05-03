@@ -1,12 +1,16 @@
 {
     "cssFiles": [
         "/config/variaveis.css",
+        "/config/themes/theme-dark.css",
+        "/libs/notyf/notyf.min.css",
         "/css/index.css",
         "/css/buttons.css",
         "/css/inputs.css"
     ],
     "jsFiles": [
-        "/libs/customComponents-1.8.4-29.min.js"
+        "/libs/customComponents-1.8.4-29.min.js",
+        "/libs/notyf/notyf.min.js",
+        "/js/global/funcoes.js"
     ],
     "metaData": {
         "meta": [
