@@ -1,29 +1,47 @@
+/* Cores do sistema */
 :root {
-    --color-background: #16151d;
-    --color-text: #fff;
-    --color-primary: #75B1FF;
-    --color-secondary: #a164f1;
-    --color-border: #422ca4;
+    --color-background: #e6e9ec;
+    --color-text: #1a1a1a;
+    --color-text-secondary: #ffffff;
+    --color-primary: #175ddc;
+    --color-secondary: #8d44ad;
+    --color-border: #999999;
+}
 
-    --button-colorText: #000;
-    --button-hover-bgColor: #2e199b;
-    --button-active-bgColor: #000000;
-    --button-disabled-bgColor: #ccc;
-    --button-disabled-color: #666;
+/* Estilo dos botões */
+:root {
+    --button-bg-color: var(--color-primary);
+    --button-color-text: var(--color-text-secondary);
+    --button-secondary-bg-color: #8d44ad00;
+    --button-secondary-color-text: var(--color-text);
+    --button-border-color: var(--button-bg-color);
+    --button-hover-bg-color: #0d2d96;
+    --button-active-bg-color: #1c39a1;
+    --button-disabled-bg-color: #e0e0e0;
+    --button-disabled-color: #999999;
     --button-submit-color: #fff;
-    --button-submit-bfColor: green;
+    --button-submit-bg-color: #178800;
 
-    --button-danger-bgColor: #ff4d4d;
-    --button-danger-hover-bgColor: #cc0000;
-    --button-danger-color: #000;
+    --button-danger-bg-color: #ff4d4d;
+    --button-danger-hover-bg-color: #cc0000;
+    --button-danger-color: #fff;
+}
 
-    --input-bgColor: #2b2b3a;
-    --input-color: #ccc;
-    --input-placeholder-color: #888;
-    --input-valid-border-color: green;
-    --input-invalid-border-color: red;
-    --input-required-border-color: yellow;
-    --input-focus-border-color: blue;
+/* Estilo dos inputs */
+:root {
+    --input-bg-color: #ffffff;
+    --input-color: var(--color-text);
+    --input-placeholder-color: #999999;
+    --input-valid-border-color: #28a745;
+    --input-invalid-border-color: #dc3545;
+    --input-required-border-color: #ffc107;
+    --input-focus-border-color: #007bff;
 
-    --span-danger-color: red;
+    --span-danger-color: #dc3545;
+}
+
+/* Estilo dos cards */
+:root {
+    --card-background: #ffffff;
+    --card-color-border: var(--color-border);
 }
