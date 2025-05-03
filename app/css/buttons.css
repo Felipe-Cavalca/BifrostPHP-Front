@@ -1,57 +1,58 @@
 button,
 a.button {
-    background-color: var(--color-primary);
-    color: var(--button-colorText);
-    border: none;
-    border-radius: 12px;
+    background-color: var(--button-bg-color, "#175ddc");
+    color: var(--button-color-text, "#ffffff");
+    border-radius: 30px;
     padding: 10px 20px;
     font-size: 16px;
     cursor: pointer;
+    border: none;
 }
 
 button.secondary,
 a.button.secondary {
-    background-color: var(--color-secondary);
+    background-color: var(--button-secondary-bg-color, "#8d44ad00");
+    color: var(--button-secondary-color-text, "#1a1a1a");
+    border: 2px solid var(--button-border-color, "#175ddc");
 }
 
 button:hover,
 a.button:hover {
-    background-color: var(--button-hover-bgColor);
+    background-color: var(--button-hover-bg-color, "#0d2d96");
+    color: var(--button-color-text, "#ffffff");
 }
 
 button:active,
 a.button:active {
-    background-color: var(--button-active-bgColor);
+    background-color: var(--button-active-bg-color, "#1c39a1");
 }
 
 button:disabled,
+button[type="submit"]:disabled,
 a.button:disabled {
-    background-color: var(--button-disabled-bgColor);
-    color: var(--button-color-disabled);
+    background-color: var(--button-disabled-bg-color, "#e0e0e0");
+    color: var(--button-disabled-color, "#999999");
     cursor: not-allowed;
 }
 
 button[type="submit"] {
-    color: var(--button-submit-color);
-    background-color: var(--button-submit-bfColor);
-}
-
-button[type="submit"]::after {
-    content: " >>";
+    color: var(--button-submit-color, "#fff");
+    background-color: var(--button-submit-bg-color, "#178800");
+    border: none;
 }
 
 button.danger,
 a.button.danger {
-    background-color: var(--button-danger-bgColor);
-    color: var(--button-danger-color);
+    background-color: var(--button-danger-bg-color, "#ff4d4d");
+    color: var(--button-danger-color, "#fff");
 }
 
 button.danger:hover,
 a.button.danger:hover {
-    background-color: var(--button-danger-hover-bgColor);
+    background-color: var(--button-danger-hover-bg-color, "#cc0000");
 }
 
 button.danger:active,
 a.button.danger:active {
-    background-color: var(--button-active-bgColor);
+    background-color: var(--button-active-bg-color, "#1c39a1");
 }
