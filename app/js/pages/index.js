@@ -5,6 +5,7 @@ const bifrost = new Bifrost(
         bifrost.replaceTextInElement("body", bifrost.config);
 
         bifrost.form("form", () => {
+            alert().success("Form submitted successfully!");
             // return false;
         }, async (response) => {
             document.querySelector("c-alert").style.display = 'block'
