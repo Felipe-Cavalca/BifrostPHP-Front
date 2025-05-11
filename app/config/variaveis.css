@@ -1,47 +1,80 @@
-/* Cores do sistema */
-:root {
-    --color-background: #e6e9ec;
-    --color-text: #1a1a1a;
-    --color-text-secondary: #ffffff;
-    --color-primary: #175ddc;
-    --color-secondary: #8d44ad;
-    --color-border: #999999;
+@media (prefers-color-scheme: ligth) {
+
+    /* Cores do sistema */
+    :root {
+        --color-background: #e6e9ec;
+        --color-text: #1a1a1a;
+        --color-text-secondary: #ffffff;
+        --color-primary: #175ddc;
+        --color-secondary: #8d44ad;
+        --color-border: #999999;
+    }
+
+    /* Estilo dos botões */
+    :root {
+        --button-bg-color: var(--color-primary);
+        --button-color-text: var(--color-text-secondary);
+        --button-secondary-bg-color: #8d44ad00;
+        --button-secondary-color-text: var(--color-text);
+        --button-border-color: var(--button-bg-color);
+        --button-hover-bg-color: #0d2d96;
+        --button-active-bg-color: #1c39a1;
+        --button-disabled-bg-color: #e0e0e0;
+        --button-disabled-color: #999999;
+        --button-submit-color: #fff;
+        --button-submit-bg-color: #178800;
+
+        --button-danger-bg-color: #ff4d4d;
+        --button-danger-hover-bg-color: #cc0000;
+        --button-danger-color: #fff;
+    }
+
+    /* Estilo dos inputs */
+    :root {
+        --input-bg-color: #ffffff;
+        --input-color: var(--color-text);
+        --input-placeholder-color: #999999;
+        --input-valid-border-color: #28a745;
+        --input-invalid-border-color: #dc3545;
+        --input-required-border-color: #ffc107;
+        --input-focus-border-color: #007bff;
+
+        --span-danger-color: #dc3545;
+    }
+
+    /* Estilo dos cards */
+    :root {
+        --card-background: #ffffff;
+        --card-color-border: var(--color-border);
+    }
+
 }
 
-/* Estilo dos botões */
-:root {
-    --button-bg-color: var(--color-primary);
-    --button-color-text: var(--color-text-secondary);
-    --button-secondary-bg-color: #8d44ad00;
-    --button-secondary-color-text: var(--color-text);
-    --button-border-color: var(--button-bg-color);
-    --button-hover-bg-color: #0d2d96;
-    --button-active-bg-color: #1c39a1;
-    --button-disabled-bg-color: #e0e0e0;
-    --button-disabled-color: #999999;
-    --button-submit-color: #fff;
-    --button-submit-bg-color: #178800;
+@media (prefers-color-scheme: dark) {
+    :root {
+        --color-background: #16151d;
+        --color-text: #fff;
+        --color-text-secondary: #ccc;
+        --color-primary: #75B1FF;
+        --color-secondary: #a164f1;
+        --color-border: #363545;
 
-    --button-danger-bg-color: #ff4d4d;
-    --button-danger-hover-bg-color: #cc0000;
-    --button-danger-color: #fff;
-}
+        --input-bg-color: #ffffff;
+        --input-color: var(--color-text);
 
-/* Estilo dos inputs */
-:root {
-    --input-bg-color: #ffffff;
-    --input-color: var(--color-text);
-    --input-placeholder-color: #999999;
-    --input-valid-border-color: #28a745;
-    --input-invalid-border-color: #dc3545;
-    --input-required-border-color: #ffc107;
-    --input-focus-border-color: #007bff;
+        --card-background: #22212b;
+        --card-color-border: var(--color-border);
 
-    --span-danger-color: #dc3545;
-}
+        --button-bg-color: var(--color-primary);
+        --button-secondary-bg-color: var(--color-secondary);
+        --button-border-color: #ffffff00;
+        --button-disabled-color: #747474;
 
-/* Estilo dos cards */
-:root {
-    --card-background: #ffffff;
-    --card-color-border: var(--color-border);
+        --input-bg-color: #585858;
+
+        --card-color-border: var(--color-border);
+
+        --nav-bg-color: var(--color-secondary);
+        --nav-color: var(--color-text);
+    }
 }

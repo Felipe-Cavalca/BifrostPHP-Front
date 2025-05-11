@@ -1,7 +1,6 @@
 {
     "cssFiles": [
         "/config/variaveis.css",
-        "/config/themes/theme-dark.css",
         "/libs/notyf/notyf.min.css",
         "/css/index.css",
         "/css/buttons.css",
