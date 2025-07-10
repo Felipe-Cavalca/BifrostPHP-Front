@@ -16,7 +16,7 @@
 
         // Scripts do front
         {
-            "label": "front docker-compose up",
+            "label": "BIFROST PHP FRONT docker-compose up",
             "type": "shell",
             "command": "docker-compose",
             "args": ["-f", "app/docker-compose.yml", "up", "--build", "-d"]
