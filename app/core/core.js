@@ -55,15 +55,30 @@ class DOM {
 
     createElement(tagName, attributes) {
         let element = document.createElement(tagName);
-        element = this.addAtributes(element, attributes);
+        element = DOM.addAtributes(element, attributes);
         return element;
     }
 
-    addAtributes(element, attributes) {
-        for (let key in attributes) {
-            element.setAttribute(key, attributes[key]);
+    /**
+     * Adiciona atributos a um elemento
+     * @param {Object} elements Elemento a ter as propriedades alteradas
+     * @param {Object} attributes Atributos a serem editados no formato chave valor
+     * @returns Objeto alterado
+     */
+    static addAtributes(elements, attributes) {
+        if (elements instanceof NodeList || Array.isArray(elements)) {
+            elements.forEach(el => {
+                for (let key in attributes) {
+                    el.setAttribute(key, attributes[key]);
+                }
+            });
+        } else {
+            for (let key in attributes) {
+                elements.setAttribute(key, attributes[key]);
+            }
         }
-        return element;
+
+        return elements;
     }
 
     addEvent(element, event, callback) {
@@ -184,7 +199,7 @@ class Bifrost {
         let metaData = this.#includes.metaData;
         let html = this.#dom.getElement("html");
 
-        this.#dom.addAtributes(html, {
+        DOM.addAtributes(html, {
             lang: "pt-br"
         });
 
