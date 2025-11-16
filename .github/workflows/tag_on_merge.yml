@@ -136,19 +136,13 @@ jobs:
           prune: true
 
   publish_docker_image_app:
-    needs: create_tag_and_draft_release  # Pega a versão gerada no job anterior
+    needs: create_tag_and_draft_release
     runs-on: ubuntu-latest
     steps:
       - name: Checkout código
         uses: actions/checkout@v4
         with:
-          fetch-depth: 0  # Obtém todo o histórico e tags
-
-      - name: Obter Última Tag
-        id: get_latest_tag
-        run: |
-          LATEST_TAG=$(git tag --sort=-v:refname | head -n 1)
-          echo "TAG=$LATEST_TAG" >> $GITHUB_ENV
+          fetch-depth: 0
 
       - name: Login no GitHub Container Registry
         run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
@@ -156,6 +150,7 @@ jobs:
       - name: Construir e Publicar Imagem Docker do APP
         run: |
           REPO_NAME=$(echo "${{ github.repository }}" | tr '[:upper:]' '[:lower:]')
+          TAG="${{ needs.create_tag_and_draft_release.outputs.new_tag }}"
 
           docker build -t ghcr.io/${REPO_NAME}:${TAG} -f app/Dockerfile app/
           docker tag ghcr.io/${REPO_NAME}:${TAG} ghcr.io/${REPO_NAME}:latest
