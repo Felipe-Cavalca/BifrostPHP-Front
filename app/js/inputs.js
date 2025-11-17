@@ -76,6 +76,26 @@ class Input {
     }
 
     /**
+     * Retorna o tamanho mínimo do input
+     * @returns {number} Tamanho mínimo do input
+     */
+    get minLength() {
+        let lengths = DOM.getAttribute(this.element, "minlength");
+        if (Array.isArray(lengths)) {
+            return lengths.map(item => parseInt(item) || 0);
+        }
+        return lengths ? parseInt(lengths) : 0;
+    }
+
+    /**
+     * Altera o tamanho mínimo do input
+     * @param {number} value Novo tamanho mínimo do input
+     */
+    set minLength(value) {
+        DOM.addAttributes(this.element, { minlength: value });
+    }
+
+    /**
      * Altera o autocomplete de inputs
      * @param {string} selector Seletor dos inputs a serem alterados
      * @param {boolean} value Define se o autocomplete será habilitado ou não
