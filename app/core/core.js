@@ -23,12 +23,13 @@ class DOM {
         return elem.getAttribute(attr);
     }
 
-    getElement(selector) {
-        let elements = document.querySelectorAll(selector);
-        if (elements.length === 1) {
-            return elements[0];
-        }
-        return elements;
+    /**
+     * Função retorna elementos do DOM
+     * @param {String} selector Seletor dos elementos
+     * @returns Lista de elementos
+     */
+    static getElement(selector) {
+        return document.querySelectorAll(selector);
     }
 
     setHtml(elem, html) {
@@ -197,7 +198,7 @@ class Bifrost {
     async #includeMetaDataAndLink() {
         let $this = this;
         let metaData = this.#includes.metaData;
-        let html = this.#dom.getElement("html");
+        let html = DOM.getElement("html");
 
         DOM.addAtributes(html, {
             lang: "pt-br"
@@ -268,7 +269,7 @@ class Bifrost {
     }
 
     form(formSelector, beforeSubmit, afterSubmit) {
-        const form = this.#dom.getElement(formSelector);
+        const form = DOM.getElement(formSelector);
         this.#dom.addEvent(form, "submit", async (event) => {
             event.preventDefault();
             let beforeResult = true;
@@ -303,7 +304,7 @@ class Bifrost {
     }
 
     replaceTextInElement(elemSelector, replacements) {
-        let elem = this.#dom.getElement(elemSelector);
+        let elem = DOM.getElement(elemSelector);
         let html = elem.innerHTML;
         Object.keys(replacements).forEach((key) => {
             html = html.replace(
