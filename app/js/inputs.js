@@ -36,6 +36,22 @@ class Input {
     }
 
     /**
+     * Retorna o placeholder do input
+     * @returns {string} Placeholder do input
+     */
+    get placeholder() {
+        return DOM.getAttribute(this.element, "placeholder");
+    }
+
+    /**
+     * Altera o placeholder do input
+     * @param {string} value Novo placeholder do input
+     */
+    set placeholder(value) {
+        DOM.addAttributes(this.element, {placeholder: value});
+    }
+
+    /**
      * Altera o autocomplete de inputs
      * @param {string} selector Seletor dos inputs a serem alterados
      * @param {boolean} value Define se o autocomplete será habilitado ou não
