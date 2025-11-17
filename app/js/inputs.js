@@ -52,6 +52,26 @@ class Input {
     }
 
     /**
+     * Retorna se o input é obrigatório
+     * @returns {boolean} true se for obrigatório, false caso contrário
+     */
+    get required() {
+        return DOM.getAttribute(this.element, "required") !== null;
+    }
+
+    /**
+     * Define se o input é obrigatório
+     * @param {boolean} value true para obrigatório, false caso contrário
+     */
+    set required(value) {
+        if (value) {
+            DOM.addAttributes(this.element, {required: true});
+        } else {
+            DOM.removeAttribute(this.element, "required");
+        }
+    }
+
+    /**
      * Altera o autocomplete de inputs
      * @param {string} selector Seletor dos inputs a serem alterados
      * @param {boolean} value Define se o autocomplete será habilitado ou não
