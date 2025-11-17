@@ -72,8 +72,18 @@ class DOM {
         return elements;
     }
 
-    addEvent(element, event, callback) {
-        element.addEventListener(event, callback);
+    /**
+     * Adiciona um evento a um ou mais elementos
+     * @param {NodeList} elements Elementos em que o evento deve ser adicionado
+     * @param {String} event Nome do evento
+     * @param {callback} callback Função a ser executada ao evento
+     */
+    static addEvent(elements, event, callback) {
+        if (elements instanceof NodeList || Array.isArray(elements)) {
+            elements.forEach(element => { element.addEventListener(event, callback); });
+        } else {
+            elements.addEventListener(event, callback);
+        }
     }
 
     async registerServiceWorker(sw) {
@@ -147,7 +157,7 @@ class Bifrost {
         this.#includeTags();
 
         if (typeof after === "function") {
-            this.#dom.addEvent(window, "load", after(this));
+            DOM.addEvent(window, "load", after(this));
         }
     }
 
@@ -259,7 +269,7 @@ class Bifrost {
 
     form(formSelector, beforeSubmit, afterSubmit) {
         const form = DOM.getElement(formSelector);
-        this.#dom.addEvent(form, "submit", async (event) => {
+        DOM.addEvent(form, "submit", async (event) => {
             event.preventDefault();
             let beforeResult = true;
 
@@ -293,15 +303,17 @@ class Bifrost {
     }
 
     replaceTextInElement(elemSelector, replacements) {
-        let elem = DOM.getElement(elemSelector);
-        let html = elem.innerHTML;
-        Object.keys(replacements).forEach((key) => {
-            html = html.replace(
-                new RegExp(`{{${key}}}`, "g"),
-                replacements[key]
-            );
+        let element = DOM.getElement(elemSelector);
+        element.forEach(elem => {
+            let html = elem.innerHTML;
+            Object.keys(replacements).forEach((key) => {
+                html = html.replace(
+                    new RegExp(`{{${key}}}`, "g"),
+                    replacements[key]
+                );
+            });
+            this.#dom.setHtml(elem, html);
         });
-        this.#dom.setHtml(elem, html);
         return true;
     }
 }
