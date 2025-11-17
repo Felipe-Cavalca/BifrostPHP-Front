@@ -73,6 +73,25 @@ class DOM {
     }
 
     /**
+     * Retorna o valor de um atributo de um ou mais elementos
+     * @param {NodeList} element Elemento(s) do qual o atributo deve ser retornado
+     * @param {String} attribute Nome do atributo a ser retornado
+     * @returns {NodeList|any} Valor do atributo ou uma lista com os valores dos atributos
+     */
+    static getAttribute(element, attribute) {
+        if (element instanceof NodeList || Array.isArray(element)) {
+            let attributes = [];
+            element.forEach(el => {
+                attributes.push(el.getAttribute(attribute));
+            });
+
+            return attributes;
+        } else {
+            return element.getAttribute(attribute);
+        }
+    }
+
+    /**
      * Adiciona um evento a um ou mais elementos
      * @param {NodeList} elements Elementos em que o evento deve ser adicionado
      * @param {String} event Nome do evento
