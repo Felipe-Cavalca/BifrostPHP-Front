@@ -92,6 +92,21 @@ class DOM {
     }
 
     /**
+     * Remove um atributo de um ou mais elementos
+     * @param {NodeList} elements Elemento(s) do qual o atributo deve ser removido
+     * @param {String} attribute Nome do atributo a ser removido
+     */
+    static removeAttribute(elements, attribute) {
+        if (elements instanceof NodeList || Array.isArray(elements)) {
+            elements.forEach(el => {
+                el.removeAttribute(attribute);
+            });
+        } else {
+            elements.removeAttribute(attribute);
+        }
+    }
+
+    /**
      * Adiciona um evento a um ou mais elementos
      * @param {NodeList} elements Elementos em que o evento deve ser adicionado
      * @param {String} event Nome do evento
