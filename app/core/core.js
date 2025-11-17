@@ -36,16 +36,6 @@ class DOM {
         elem.innerHTML = html;
     }
 
-    disableAutoComplete() {
-        Array.from(
-            document.querySelectorAll("input:not([autocomplete])")
-        ).forEach((element) => {
-            element = this.addAtributes(element, {
-                autocomplete: "off",
-            });
-        });
-    }
-
     insertBefore(newNode, referenceNode) {
         referenceNode.insertBefore(newNode, referenceNode.firstChild);
     }
@@ -155,7 +145,6 @@ class Bifrost {
         this.#includeDefaultJs();
         this.#includeMetaDataAndLink();
         this.#includeTags();
-        this.#dom.disableAutoComplete();
 
         if (typeof after === "function") {
             this.#dom.addEvent(window, "load", after(this));
