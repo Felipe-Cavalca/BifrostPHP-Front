@@ -96,6 +96,26 @@ class Input {
     }
 
     /**
+     * Retorna o tamanho máximo do input
+     * @returns {number} Tamanho máximo do input
+     */
+    get maxLength() {
+        let lengths = DOM.getAttribute(this.element, "maxlength");
+        if (Array.isArray(lengths)) {
+            return lengths.map(item => parseInt(item) || 0);
+        }
+        return lengths ? parseInt(lengths) : 0;
+    }
+
+    /**
+     * Altera o tamanho máximo do input
+     * @param {number} value Novo tamanho máximo do input
+     */
+    set maxLength(value) {
+        DOM.addAttributes(this.element, { maxlength: value });
+    }
+
+    /**
      * Altera o autocomplete de inputs
      * @param {string} selector Seletor dos inputs a serem alterados
      * @param {boolean} value Define se o autocomplete será habilitado ou não
