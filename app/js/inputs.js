@@ -26,7 +26,7 @@ class Input {
      * @param {boolean} value Define se o autocomplete será habilitado ou não
      */
     set autocomplete(value) {
-        DOM.addAtributes(this.element, {
+        DOM.addAttributes(this.element, {
             autocomplete: value ? "on" : "off",
         });
     }

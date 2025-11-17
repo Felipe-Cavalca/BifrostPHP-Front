@@ -46,7 +46,7 @@ class DOM {
 
     createElement(tagName, attributes) {
         let element = document.createElement(tagName);
-        element = DOM.addAtributes(element, attributes);
+        element = DOM.addAttributes(element, attributes);
         return element;
     }
 
@@ -56,7 +56,7 @@ class DOM {
      * @param {Object} attributes Atributos a serem editados no formato chave valor
      * @returns Objeto alterado
      */
-    static addAtributes(elements, attributes) {
+    static addAttributes(elements, attributes) {
         if (elements instanceof NodeList || Array.isArray(elements)) {
             elements.forEach(el => {
                 for (let key in attributes) {
@@ -199,7 +199,7 @@ class Bifrost {
         let metaData = this.#includes.metaData;
         let html = DOM.getElement("html");
 
-        DOM.addAtributes(html, {
+        DOM.addAttributes(html, {
             lang: "pt-br"
         });
 
