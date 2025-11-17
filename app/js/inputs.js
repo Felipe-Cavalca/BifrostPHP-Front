@@ -53,10 +53,14 @@ class Input {
 
     /**
      * Retorna se o input é obrigatório
-     * @returns {boolean} true se for obrigatório, false caso contrário
+     * @returns {boolean|array} true se for obrigatório, false caso contrário
      */
     get required() {
-        return DOM.getAttribute(this.element, "required") !== null;
+        let requireds = DOM.getAttribute(this.element, "required");
+        if (Array.isArray(requireds)) {
+            return requireds.map(item => item !== null);
+        }
+        return requireds !== null;
     }
 
     /**
