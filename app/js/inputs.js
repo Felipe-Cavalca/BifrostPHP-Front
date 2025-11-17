@@ -15,10 +15,14 @@ class Input {
 
     /**
      * Seleciona os elementos do DOM conforme o seletor informado
-     * @returns NodeList com os elementos selecionados
+     * @returns {NodeList|Object} com os elementos selecionados ou o elemento único
      */
     get element() {
-        return DOM.getElement(this.selector);
+        let elements = DOM.getElement(this.selector);
+        if (elements.length == 1) {
+            return elements[0];
+        }
+        return elements;
     }
 
     /**
