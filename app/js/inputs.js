@@ -245,8 +245,22 @@ class Input {
         input = new Input(seletor + ':not([spellcheck])');
         input.spellcheck = true;
     }
+
+    /**
+     * Configura inputs do tipo email com atributos recomendados sem sobreposição dos atributos já existentes
+     * @param {string} seletor seletor dos inputs a serem alterados
+     */
+    static applyTypeEmail(seletor = "input[type='email']") {
+        let input = new Input(seletor + ':not([inputmode])');
+        input.inputMode = Input.InputModeEnum.EMAIL;
+        input = new Input(seletor + ':not([autocapitalize])');
+        input.autocapitalize = Input.InputAutocapitalizeEnum.OFF;
+        input = new Input(seletor + ':not([spellcheck])');
+        input.spellcheck = false;
+    }
 }
 
 // Desabilita o autocomplete de todos os inputs que não possuírem o atributo definido
 Input.setAutoComplete("input:not([autocomplete])", false);
 Input.applyTypeName();
+Input.applyTypeEmail();
