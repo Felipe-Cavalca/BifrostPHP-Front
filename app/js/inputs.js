@@ -18,6 +18,14 @@ class Input {
         LATIN_NAME: "latin-name" // Names with Latin characters
     }
 
+    static InputAutocapitalizeEnum = {
+        OFF: "off",
+        NONE: "none",
+        SENTENCES: "sentences",
+        WORDS: "words",
+        CHARACTERS: "characters"
+    }
+
     /**
      * Cria um objeto Js para manipulação de inputs
      * @param {String} selector Selector html para os inputs
@@ -169,6 +177,26 @@ class Input {
             throw new Error(`Invalid inputMode: ${value}`);
         }
         DOM.addAttributes(this.element, { inputmode: value });
+    }
+
+    /**
+     * Retorna o autocapitalize do input
+     * @returns {string|array} Autocapitalize do input
+     */
+    get autocapitalize() {
+        let autocapitalizeValues = DOM.getAttribute(this.element, "autocapitalize");
+        if (Array.isArray(autocapitalizeValues)) {
+            return autocapitalizeValues.map(item => item || "");
+        }
+        return autocapitalizeValues || "";
+    }
+
+    /**
+     * Altera o autocapitalize do input
+     * @param {string} value Novo autocapitalize do input
+     */
+    set autocapitalize(value) {
+        DOM.addAttributes(this.element, { autocapitalize: value });
     }
 
     /**
