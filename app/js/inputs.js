@@ -5,6 +5,19 @@ class Input {
 
     selector = "";
 
+    static InputModeEnum = {
+        NONE: "none", // Default
+        TEXT: "text", // Default for text inputs
+        DECIMAL: "decimal", // Numeric input with decimal point
+        NUMERIC: "numeric", // Numeric input
+        TEL: "tel", // Telephone input
+        SEARCH: "search", // Search input
+        EMAIL: "email", // Email input
+        URL: "url", // URL input
+        PASSWORD: "password", // Password input
+        LATIN_NAME: "latin-name" // Names with Latin characters
+    }
+
     /**
      * Cria um objeto Js para manipulação de inputs
      * @param {String} selector Selector html para os inputs
@@ -48,7 +61,7 @@ class Input {
      * @param {string} value Novo placeholder do input
      */
     set placeholder(value) {
-        DOM.addAttributes(this.element, {placeholder: value});
+        DOM.addAttributes(this.element, { placeholder: value });
     }
 
     /**
@@ -69,7 +82,7 @@ class Input {
      */
     set required(value) {
         if (value) {
-            DOM.addAttributes(this.element, {required: true});
+            DOM.addAttributes(this.element, { required: true });
         } else {
             DOM.removeAttribute(this.element, "required");
         }
@@ -133,6 +146,29 @@ class Input {
      */
     set pattern(value) {
         DOM.addAttributes(this.element, { pattern: value });
+    }
+
+    /**
+     * Retorna o inputmode do input
+     * @returns {string|array} Inputmode do input
+     */
+    get inputMode() {
+        let inputModes = DOM.getAttribute(this.element, "inputmode");
+        if (Array.isArray(inputModes)) {
+            return inputModes.map(item => item || "");
+        }
+        return inputModes || "";
+    }
+
+    /**
+     * Altera o inputmode do input
+     * @param {string} value Novo inputmode do input
+     */
+    set inputMode(value) {
+        if (!Object.values(Input.InputModeEnum).includes(value)) {
+            throw new Error(`Invalid inputMode: ${value}`);
+        }
+        DOM.addAttributes(this.element, { inputmode: value });
     }
 
     /**
