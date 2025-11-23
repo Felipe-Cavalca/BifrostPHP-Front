@@ -1,4 +1,4 @@
-@media (prefers-color-scheme: ligth) {
+@media (prefers-color-scheme: light) {
 
     /* Cores do sistema */
     :root {
@@ -59,9 +59,6 @@
         --color-secondary: #a164f1;
         --color-border: #363545;
 
-        --input-bg-color: #ffffff;
-        --input-color: var(--color-text);
-
         --card-background: #22212b;
         --card-color-border: var(--color-border);
 
@@ -70,11 +67,23 @@
         --button-border-color: #ffffff00;
         --button-disabled-color: #747474;
 
-        --input-bg-color: #585858;
-
         --card-color-border: var(--color-border);
 
         --nav-bg-color: var(--color-secondary);
         --nav-color: var(--color-text);
+    }
+
+    /* Estilo dos inputs */
+    :root {
+        --input-bg-color: #22212b;
+        --input-color: var(--color-text);
+        --input-placeholder-color: rgba(255,255,255,0.6);
+        --input-border-color: #2b2933;
+        --input-valid-border-color: #28a745;
+        --input-invalid-border-color: #ff6b6b;
+        --input-required-border-color: #f0ad4e;
+        --input-focus-border-color: var(--color-primary);
+
+        --span-danger-color: var(--input-invalid-border-color);
     }
 }

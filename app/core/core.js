@@ -23,26 +23,17 @@ class DOM {
         return elem.getAttribute(attr);
     }
 
-    getElement(selector) {
-        let elements = document.querySelectorAll(selector);
-        if (elements.length === 1) {
-            return elements[0];
-        }
-        return elements;
+    /**
+     * Função retorna elementos do DOM
+     * @param {String} selector Seletor dos elementos
+     * @returns Lista de elementos
+     */
+    static getElement(selector) {
+        return document.querySelectorAll(selector);
     }
 
     setHtml(elem, html) {
         elem.innerHTML = html;
-    }
-
-    disableAutoComplete() {
-        Array.from(
-            document.querySelectorAll("input:not([autocomplete])")
-        ).forEach((element) => {
-            element = this.addAtributes(element, {
-                autocomplete: "off",
-            });
-        });
     }
 
     insertBefore(newNode, referenceNode) {
@@ -55,19 +46,78 @@ class DOM {
 
     createElement(tagName, attributes) {
         let element = document.createElement(tagName);
-        element = this.addAtributes(element, attributes);
+        element = DOM.addAttributes(element, attributes);
         return element;
     }
 
-    addAtributes(element, attributes) {
-        for (let key in attributes) {
-            element.setAttribute(key, attributes[key]);
+    /**
+     * Adiciona atributos a um elemento
+     * @param {Object} elements Elemento a ter as propriedades alteradas
+     * @param {Object} attributes Atributos a serem editados no formato chave valor
+     * @returns Objeto alterado
+     */
+    static addAttributes(elements, attributes) {
+        if (elements instanceof NodeList || Array.isArray(elements)) {
+            elements.forEach(el => {
+                for (let key in attributes) {
+                    el.setAttribute(key, attributes[key]);
+                }
+            });
+        } else {
+            for (let key in attributes) {
+                elements.setAttribute(key, attributes[key]);
+            }
         }
-        return element;
+
+        return elements;
     }
 
-    addEvent(element, event, callback) {
-        element.addEventListener(event, callback);
+    /**
+     * Retorna o valor de um atributo de um ou mais elementos
+     * @param {NodeList} element Elemento(s) do qual o atributo deve ser retornado
+     * @param {String} attribute Nome do atributo a ser retornado
+     * @returns {NodeList|any} Valor do atributo ou uma lista com os valores dos atributos
+     */
+    static getAttribute(element, attribute) {
+        if (element instanceof NodeList || Array.isArray(element)) {
+            let attributes = [];
+            element.forEach(el => {
+                attributes.push(el.getAttribute(attribute));
+            });
+
+            return attributes;
+        } else {
+            return element.getAttribute(attribute);
+        }
+    }
+
+    /**
+     * Remove um atributo de um ou mais elementos
+     * @param {NodeList} elements Elemento(s) do qual o atributo deve ser removido
+     * @param {String} attribute Nome do atributo a ser removido
+     */
+    static removeAttribute(elements, attribute) {
+        if (elements instanceof NodeList || Array.isArray(elements)) {
+            elements.forEach(el => {
+                el.removeAttribute(attribute);
+            });
+        } else {
+            elements.removeAttribute(attribute);
+        }
+    }
+
+    /**
+     * Adiciona um evento a um ou mais elementos
+     * @param {NodeList} elements Elementos em que o evento deve ser adicionado
+     * @param {String} event Nome do evento
+     * @param {callback} callback Função a ser executada ao evento
+     */
+    static addEvent(elements, event, callback) {
+        if (elements instanceof NodeList || Array.isArray(elements)) {
+            elements.forEach(element => { element.addEventListener(event, callback); });
+        } else {
+            elements.addEventListener(event, callback);
+        }
     }
 
     async registerServiceWorker(sw) {
@@ -139,10 +189,9 @@ class Bifrost {
         this.#includeDefaultJs();
         this.#includeMetaDataAndLink();
         this.#includeTags();
-        this.#dom.disableAutoComplete();
 
         if (typeof after === "function") {
-            this.#dom.addEvent(window, "load", after(this));
+            DOM.addEvent(window, "load", after(this));
         }
     }
 
@@ -182,9 +231,9 @@ class Bifrost {
     async #includeMetaDataAndLink() {
         let $this = this;
         let metaData = this.#includes.metaData;
-        let html = this.#dom.getElement("html");
+        let html = DOM.getElement("html");
 
-        this.#dom.addAtributes(html, {
+        DOM.addAttributes(html, {
             lang: "pt-br"
         });
 
@@ -253,8 +302,8 @@ class Bifrost {
     }
 
     form(formSelector, beforeSubmit, afterSubmit) {
-        const form = this.#dom.getElement(formSelector);
-        this.#dom.addEvent(form, "submit", async (event) => {
+        const form = DOM.getElement(formSelector);
+        DOM.addEvent(form, "submit", async (event) => {
             event.preventDefault();
             let beforeResult = true;
 
@@ -288,15 +337,17 @@ class Bifrost {
     }
 
     replaceTextInElement(elemSelector, replacements) {
-        let elem = this.#dom.getElement(elemSelector);
-        let html = elem.innerHTML;
-        Object.keys(replacements).forEach((key) => {
-            html = html.replace(
-                new RegExp(`{{${key}}}`, "g"),
-                replacements[key]
-            );
+        let element = DOM.getElement(elemSelector);
+        element.forEach(elem => {
+            let html = elem.innerHTML;
+            Object.keys(replacements).forEach((key) => {
+                html = html.replace(
+                    new RegExp(`{{${key}}}`, "g"),
+                    replacements[key]
+                );
+            });
+            this.#dom.setHtml(elem, html);
         });
-        this.#dom.setHtml(elem, html);
         return true;
     }
 }

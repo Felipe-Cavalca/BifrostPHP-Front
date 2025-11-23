@@ -9,7 +9,8 @@
     "jsFiles": [
         "/libs/customComponents-1.8.4-29.min.js",
         "/libs/notyf/notyf.min.js",
-        "/js/global/funcoes.js"
+        "/js/global/funcoes.js",
+        "/js/inputs.js"
     ],
     "metaData": {
         "meta": [
