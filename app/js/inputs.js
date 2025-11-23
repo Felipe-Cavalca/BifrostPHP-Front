@@ -200,6 +200,26 @@ class Input {
     }
 
     /**
+     * Retorna o spellcheck do input
+     * @returns {boolean|array} Spellcheck do input
+     */
+    get spellcheck() {
+        let spellcheckValues = DOM.getAttribute(this.element, "spellcheck");
+        if (Array.isArray(spellcheckValues)) {
+            return spellcheckValues.map(item => item === "true");
+        }
+        return spellcheckValues === "true";
+    }
+
+    /**
+     * Altera o spellcheck do input
+     * @param {boolean} value Define se o spellcheck será habilitado ou não
+     */
+    set spellcheck(value) {
+        DOM.addAttributes(this.element, { spellcheck: value ? "true" : "false" });
+    }
+
+    /**
      * Altera o autocomplete de inputs
      * @param {string} selector Seletor dos inputs a serem alterados
      * @param {boolean} value Define se o autocomplete será habilitado ou não
