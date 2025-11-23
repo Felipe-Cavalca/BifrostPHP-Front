@@ -229,7 +229,24 @@ class Input {
         input.autocomplete = value;
     }
 
+    /**
+     * Configura inputs do tipo name com atributos recomendados sem sobreposição dos atributos já existentes
+     * @param {string} seletor seletor dos inputs a serem alterados
+     */
+    static applyTypeName(seletor = "input[type='name']") {
+        let input = new Input(seletor + ':not([minlength])');
+        input.minLength = 4;
+        input = new Input(seletor + ':not([pattern])');
+        input.pattern = "^[a-zA-ZÀ-ÖØ-öø-ÿ]+(\\s+[a-zA-ZÀ-ÖØ-öø-ÿ]+)+$";
+        input = new Input(seletor + ':not([inputmode])');
+        input.inputMode = Input.InputModeEnum.LATIN_NAME;
+        input = new Input(seletor + ':not([autocapitalize])');
+        input.autocapitalize = Input.InputAutocapitalizeEnum.WORDS;
+        input = new Input(seletor + ':not([spellcheck])');
+        input.spellcheck = true;
+    }
 }
 
 // Desabilita o autocomplete de todos os inputs que não possuírem o atributo definido
 Input.setAutoComplete("input:not([autocomplete])", false);
+Input.applyTypeName();
