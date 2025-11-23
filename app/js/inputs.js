@@ -116,6 +116,26 @@ class Input {
     }
 
     /**
+     * Retorna o pattern do input
+     * @returns {string|array} Pattern do input
+     */
+    get pattern() {
+        let patterns = DOM.getAttribute(this.element, "pattern");
+        if (Array.isArray(patterns)) {
+            return patterns.map(item => item || "");
+        }
+        return patterns || "";
+    }
+
+    /**
+     * Altera o pattern do input
+     * @param {string} value Novo pattern do input
+     */
+    set pattern(value) {
+        DOM.addAttributes(this.element, { pattern: value });
+    }
+
+    /**
      * Altera o autocomplete de inputs
      * @param {string} selector Seletor dos inputs a serem alterados
      * @param {boolean} value Define se o autocomplete será habilitado ou não
